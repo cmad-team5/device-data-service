@@ -13,7 +13,7 @@ pipeline{
         stage('build'){
             steps{
                 echo 'building worker app'
-                dir('worker'){
+                dir('device-data-service'){
                   sh 'mvn compile'
                 }
             }
@@ -21,7 +21,7 @@ pipeline{
         stage('test'){
             steps{
                 echo 'running unit tests on worker app'
-                dir('worker'){
+                dir('device-data-service'){
                   sh 'mvn clean test'
                 }
             }
@@ -29,7 +29,7 @@ pipeline{
         stage('package'){
             steps{
                 echo 'packaging worker app into a jarfile'
-                dir('worker'){
+                dir('device-data-service'){
                   sh 'mvn package -DskipTests'
                   archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
                 }
